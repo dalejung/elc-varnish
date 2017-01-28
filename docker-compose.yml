@@ -2,10 +2,19 @@ version: '2'
 services:
   varnish:
     build: "./varnish"
+    depends_on:
+      - failover # needed for networking
     volumes:
-      - ./varnish/default.vcl:/etc/varnish/default.vcl
+      - ./default.vcl:/etc/varnish/default.vcl
     ports:
      - "8005:80"
+
+  failover:
+    build: "./varnish"
+    volumes:
+      - ./failover.vcl:/etc/varnish/default.vcl
+    ports:
+     - "8006:80"
 
   app:
     build: "./app"
