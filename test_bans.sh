@@ -1,6 +1,6 @@
 #!/bin/sh
 
-docker-compose exec varnish varnishadm backend.set_health default healthy
+docker-compose start app
 
 docker-compose exec varnish varnishadm backend.list
 
@@ -13,7 +13,7 @@ docker-compose exec varnish curl http://127.0.0.1:80/bob2
 
 docker-compose exec varnish varnishadm ban "req.url ~ /bob*"
 
-docker-compose exec varnish varnishadm backend.set_health default sick
+docker-compose stop app
 docker-compose exec varnish varnishadm backend.list
 
 docker-compose exec varnish varnishadm ban.list
