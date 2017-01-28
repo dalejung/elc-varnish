@@ -1,0 +1,13 @@
+version: '2'
+services:
+  varnish:
+    build: "./varnish"
+    volumes:
+      - ./varnish/default.vcl:/etc/varnish/default.vcl
+    ports:
+     - "8005:80"
+
+  app:
+    build: "./app"
+    ports:
+     - "5000:5000"
