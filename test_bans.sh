@@ -2,6 +2,7 @@
 
 docker-compose start app
 
+docker-compose exec varnish varnishadm backend.set_health default healthy
 docker-compose exec varnish varnishadm backend.list
 
 # prime caches
@@ -22,3 +23,8 @@ docker-compose exec varnish varnishadm ban.list
 echo -e "\nTry Again:\n"
 docker-compose exec varnish curl http://127.0.0.1:80/dale
 docker-compose exec varnish curl http://127.0.0.1:80/bob
+
+#
+echo -e "\nSet Backend as Sick:\n"
+docker-compose exec varnish varnishadm backend.set_health default sick
+docker-compose exec varnish varnishadm backend.list

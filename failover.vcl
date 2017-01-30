@@ -24,7 +24,7 @@ sub vcl_backend_response {
 }
 
 sub vcl_deliver {
-    set resp.http.X-Failover = "TRUE";
+    set resp.http.X-Failover = "1";
 
     return (deliver);
 }
